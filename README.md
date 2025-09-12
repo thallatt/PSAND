@@ -1,8 +1,9 @@
 # PSAND: Planetary Structure ANd Dynamics
 A python method to couple planetary structure and dynamics, as published in Hallatt & Millholland (2025).
 
-# A minimal working example
+## A minimal working example
 
+```
 import numpy as np
 import consts
 from scipy.integrate import solve_ivp
@@ -31,3 +32,4 @@ plt.title('entropy vs. time')
 plt.ylabel(r'S [$k_{B}/m_{H}$]')
 plt.xlabel('time [yr]')
 plt.show()
+```
