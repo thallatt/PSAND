@@ -3,6 +3,8 @@ A python method to couple planetary structure and dynamics, as published in Hall
 
 ## A minimal working example
 
+This example loads our interpolation functions assuming solar composition gas, and a 10 Earth mass core. We set the irradiation temperature to 900 K and the total planet mass to 250 Earth masses. We integrate equation 5 from Hallatt & Millholland (2025). We then plot the entropy as a function of time.
+
 ```
 import numpy as np
 import consts
