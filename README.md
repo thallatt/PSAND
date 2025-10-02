@@ -46,7 +46,7 @@ sol=solve_ivp(fevo,[t0,tend],[S0*kb/mh],method='RK45')
 
 # plot our output!
 plt.loglog(sol.t/yr,sol.y[0]/(kb/mh))
-plt.xrange(1e7,tend)
+plt.xlim(1e7,tend)
 plt.title('entropy vs. time')
 plt.ylabel(r'S [$k_{B}/m_{H}$]')
 plt.xlabel('time [yr]')
