@@ -1,6 +1,10 @@
 # PSAND: Planetary Structure ANd Dynamics
 A python method to couple planetary structure and dynamics, as published in Hallatt & Millholland (2025): https://arxiv.org/abs/2509.22923.
 
+If you use PSAND, please cite Hallatt & Millholland (2025) (https://arxiv.org/abs/2509.22923).
+
+Please also reach out to me if you would like to collaborate, have questions, or if you would like bespoke structure models to be created. I can be reached at thallatt@mit.edu.
+
 Data files for interpolation take up 117 MB (compressed) / 538 MB (uncompressed).
 
 ## A minimal working example
@@ -22,9 +26,9 @@ Tirr=900.
 M=250.
 
 # load our interpolation functions for planet structure
-fTdm=np.load('fTm_mc=10_z=0_1au.npy',allow_pickle=True).item()
-fL=np.load('fL_mc=10_z=0_1au.npy',allow_pickle=True).item()
-fR=np.load('fR_mc=10_z=0_1au.npy',allow_pickle=True).item()
+fTdm=np.load('fTm_mc10_z0_1au.npy',allow_pickle=True).item()
+fL=np.load('fL_mc10_z0_1au.npy',allow_pickle=True).item()
+fR=np.load('fR_mc10_z0_1au.npy',allow_pickle=True).item()
 
 # this function defines our extra heating rate. for this example, we set it to zero.
 def Lx(t):
