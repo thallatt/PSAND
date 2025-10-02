@@ -1,7 +1,7 @@
 # PSAND: Planetary Structure ANd Dynamics
-A python method to couple planetary structure and dynamics, as published in Hallatt & Millholland (2025): https://arxiv.org/abs/2509.22923.
+A python method to couple planetary structure and dynamics, as published in Hallatt & Millholland (2025): <https://arxiv.org/abs/2509.22923>.
 
-If you use PSAND, please cite Hallatt & Millholland (2025) (https://ui.adsabs.harvard.edu/abs/2025arXiv250922923H/abstract).
+If you use PSAND, please cite Hallatt & Millholland (2025) <https://ui.adsabs.harvard.edu/abs/2025arXiv250922923H/abstract>.
 
 Please also reach out to me if you would like to collaborate, have questions, or if you would like bespoke structure models to be created. I can be reached at thallatt@mit.edu.
 
