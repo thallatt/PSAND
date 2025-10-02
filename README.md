@@ -15,6 +15,7 @@ This example loads our interpolation functions assuming solar composition gas, a
 import numpy as np
 from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
+import smplotlib
 
 # define our constants (cgs units)
 yr=31560000.0
