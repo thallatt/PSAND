@@ -1,5 +1,6 @@
 # PSAND: Planetary Structure ANd Dynamics
 A python method to couple planetary structure and dynamics, as published in Hallatt & Millholland (2025): https://arxiv.org/abs/2509.22923.
+
 Data files are 336 MB (compressed) / 580 MB (uncompressed).
 
 ## A minimal working example
