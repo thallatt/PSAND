@@ -59,3 +59,4 @@ plt.ylabel(r'S [$k_{B}/m_{H}$]')
 plt.xlabel('time [yr]')
 plt.show()
 ```
+![example](example.png "example")
