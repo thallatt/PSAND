@@ -40,13 +40,13 @@ def fevo(t,y):
   return [dsdt]
 
 # define initial conditions
-t0,tend=0.,1e10*yr
-S0=8.
+t0,tend=1e7*yr,1e10*yr
+S0=10.
 sol=solve_ivp(fevo,[t0,tend],[S0*kb/mh],method='RK45')
 
 # plot our output!
 plt.loglog(sol.t/yr,sol.y[0]/(kb/mh))
-plt.xlim(1e7,tend/yr)
+plt.xlim(t0/yr,tend/yr)
 plt.title('entropy vs. time')
 plt.ylabel(r'S [$k_{B}/m_{H}$]')
 plt.xlabel('time [yr]')
