@@ -30,7 +30,7 @@ def Lx(t):
 
 # this function evolves planet entropy by "stepping through the adiabats" (equation 5 of Hallatt & Millholland (2025)).
 def dSdtm(S,Lextra_,M,Tirr):
-  return (-fL(S,M,Tirr)+Lextra_)/fTm(S,M,Tirr)
+  return (-fL(S,M,Tirr)+Lextra_)/fTdm(S,M,Tirr)
 
 # this function yields the differential equation to be solved with scipy
 def fevo(t,y):
