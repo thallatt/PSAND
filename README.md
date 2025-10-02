@@ -51,6 +51,8 @@ def fevo(t,y):
 # define initial conditions
 t0,tend=1e7*yr,1e10*yr
 S0=10.
+
+# integrate thermal evolution!
 sol=solve_ivp(fevo,[t0,tend],[S0*kb/mh],method='RK45')
 
 # plot our output!
