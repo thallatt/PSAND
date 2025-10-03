@@ -96,6 +96,6 @@ ax3.set_xticks([1e6,1e7,1e8,1e9,1e10])
 ax3.set_yticks(np.arange(10.,25.))
 
 fig.tight_layout()
-fig.savefig('example.png',bbox_inches='tight')
+fig.savefig('example_evolution.png',bbox_inches='tight')
 ```
-![example](example.png "example")
+![example_evolution](example_evolution.png "example_evolution")
