@@ -63,15 +63,16 @@ S0=10.
 sol=solve_ivp(fevo,[t0,tend],[S0*kB/mH])
 
 # plot our output!
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(3, 3))
 ax.loglog(sol.t/yr,sol.y[0]/(kB/mH))
 ax.set_xlim(t0/yr,tend/yr)
 ax.set_ylim(6,11)
 ax.set_title('entropy vs. time')
 ax.set_ylabel(r'S [$k_{B}/m_{H}$]')
 ax.set_xlabel('time [yr]')
+ax.yaxis.set_major_locator(tck.AutoMajorLocator())
 ax.yaxis.set_minor_locator(tck.AutoMinorLocator())
-ax.figure(figsize=(3, 3))
-ax.savefig('example.pdf',bbox_inches='tight')
+fig = ax.figure
+fig.savefig('example.pdf',bbox_inches='tight')
 ```
 ![example](example.png "example")
