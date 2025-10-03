@@ -64,7 +64,7 @@ sol=solve_ivp(fevo,[t0,tend],[S0*kB/mH])
 
 # plot our output!
 fig, ax = plt.subplots(figsize=(3, 3))
-ax.loglog(sol.t/yr,sol.y[0]/(kB/mH))
+ax.semilogx(sol.t/yr,sol.y[0]/(kB/mH))
 ax.set_xlim(t0/yr,tend/yr)
 ax.set_ylim(6,11)
 ax.set_title('entropy vs. time')
