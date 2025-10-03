@@ -70,8 +70,8 @@ ax.set_ylim(6,11)
 ax.set_title('entropy vs. time')
 ax.set_ylabel(r'S [$k_{B}/m_{H}$]')
 ax.set_xlabel('time [yr]')
-ax.xaxis.set_major_locator(MultipleLocator(10))
-ax.xaxis.set_minor_locator(MultipleLocator(1))
+ax.set_xticks([1e6,1e7,1e8,1e9,1e10])
+ax.set_yticks([6.,7.,8.,9.,10.,11.])
 fig = ax.figure
 fig.savefig('example.pdf',bbox_inches='tight')
 ```
