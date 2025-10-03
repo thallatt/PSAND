@@ -36,9 +36,9 @@ M=250.
 mc='10'
 # metallicity identifier string (solar)
 z='0'
-fTdm=np.load('data/fTm_mc'+mc+'_z+'z'+_1au.npy',allow_pickle=True).item()
-fL=np.load('data/fL_mc+'mc'+_z+'z'+_1au.npy',allow_pickle=True).item()
-fR=np.load('data/fR_mc+'mc'+_z+'z'+_1au.npy',allow_pickle=True).item()
+fTdm=np.load('data/fTm_mc'+mc+'_z'+z+'_1au.npy',allow_pickle=True).item()
+fL=np.load('data/fL_mc'+mc+'_z'+z+'_1au.npy',allow_pickle=True).item()
+fR=np.load('data/fR_mc'+mc+'_z'+z+'_1au.npy',allow_pickle=True).item()
 
 # this function defines our extra heating rate. for this example, we set it to zero.
 def Lx(t):
