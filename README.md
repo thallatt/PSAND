@@ -63,7 +63,7 @@ S0=10.
 sol=solve_ivp(fevo,[t0,tend],[S0*kB/mH])
 
 # plot our output!
-fig, (ax1,ax2,ax3) = plt.subplots(1,3,figsize=(3, 3))
+fig, (ax1,ax2,ax3) = plt.subplots(1,3,figsize=(7, 5))
 ax1.semilogx(sol.t/yr,sol.y[0]/(kB/mH))
 ax1.set_xlim(t0/yr,tend/yr)
 ax1.set_ylim(6,11)
@@ -74,24 +74,24 @@ ax1.set_xticks([1e6,1e7,1e8,1e9,1e10])
 ax1.set_yticks([6.,7.,8.,9.,10.,11.])
 
 Lout=fL(sol.y[0],M,Tirr)
-ax2.semilogx(sol.t/yr,Lout)
+ax2.loglog(sol.t/yr,Lout)
 ax2.set_xlim(t0/yr,tend/yr)
-ax2.set_ylim(1e24,,1e28)
+ax2.set_ylim(1e24,,1e30)
 ax2.set_title('luminosity vs. time')
 ax2.set_ylabel(r'L [erg/s]')
 ax2.set_xlabel('time [yr]')
 ax2.set_xticks([1e6,1e7,1e8,1e9,1e10])
-ax2.set_yticks([1e24,1e25,1e26,1e27,1e28])
+ax2.set_yticks([1e24,1e25,1e26,1e27,1e28,1e29,1e30])
 
 Rout=fR(sol.y[0],M,Tirr)
 ax3.semilogx(sol.t/yr,Rout)
 ax3.set_xlim(t0/yr,tend/yr)
-ax3.set_ylim(9.,15.)
+ax3.set_ylim(10.,25.)
 ax3.set_title('radius vs. time')
 ax3.set_ylabel(r'R [R$_{\oplus}$]')
 ax3.set_xlabel('time [yr]')
 ax3.set_xticks([1e6,1e7,1e8,1e9,1e10])
-ax3.set_yticks([9.,10.,11.,12.,13.,14.,15.])
+ax3.set_yticks(np.arange(10.,25.))
 
 fig.savefig('example.pdf',bbox_inches='tight')
 ```
