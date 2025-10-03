@@ -21,17 +21,21 @@ import smplotlib
 
 # define our constants (cgs units)
 yr=31560000.0
-kb=1.3807e-16
-mh=1.6726e-24
+kB=1.3807e-16
+mB=1.6726e-24
 
 # planet properties (fixed in time for this example)
 Tirr=900.
 M=250.
 
 # load our interpolation functions for planet structure
-fTdm=np.load('fTm_mc10_z0_1au.npy',allow_pickle=True).item()
-fL=np.load('fL_mc10_z0_1au.npy',allow_pickle=True).item()
-fR=np.load('fR_mc10_z0_1au.npy',allow_pickle=True).item()
+# core mass identifier string
+mc='10'
+# metallicity identifier string (solar)
+z='0'
+fTdm=np.load('data/fTm_mc'+mc+'_z+'z'+_1au.npy',allow_pickle=True).item()
+fL=np.load('data/fL_mc+'mc'+_z+'z'+_1au.npy',allow_pickle=True).item()
+fR=np.load('data/fR_mc+'mc'+_z+'z'+_1au.npy',allow_pickle=True).item()
 
 # this function defines our extra heating rate. for this example, we set it to zero.
 def Lx(t):
@@ -49,14 +53,14 @@ def fevo(t,y):
   return [dsdt]
 
 # define initial conditions
-t0,tend=1e7*yr,1e10*yr
+t0,tend=1e6*yr,1e10*yr
 S0=10.
 
 # integrate thermal evolution!
-sol=solve_ivp(fevo,[t0,tend],[S0*kb/mh],method='RK45')
+sol=solve_ivp(fevo,[t0,tend],[S0*kB/mH])
 
 # plot our output!
-plt.loglog(sol.t/yr,sol.y[0]/(kb/mh))
+plt.loglog(sol.t/yr,sol.y[0]/(kB/mH))
 plt.xlim(t0/yr,tend/yr)
 plt.title('entropy vs. time')
 plt.ylabel(r'S [$k_{B}/m_{H}$]')
