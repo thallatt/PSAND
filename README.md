@@ -7,6 +7,8 @@ Please also reach out to me if you would like to collaborate, have questions, or
 
 Data files for interpolation take up 117 MB (compressed) / 538 MB (uncompressed).
 
+The structure grids cover temperatures 288-2884 K, core masses {10, 20} Earth masses, total masses [10.1,300] Earth masses, and "metallicities" (assumed SiO2) {0.02,0.1,0.5}.
+
 ## A minimal working example
 
 This example loads our interpolation functions assuming solar composition gas, and a 10 Earth mass core. We set the irradiation temperature to 900 K and the total planet mass to 250 Earth masses. We integrate equation 5 from Hallatt & Millholland (2025). We then plot the entropy as a function of time.
@@ -15,6 +17,7 @@ This example loads our interpolation functions assuming solar composition gas, a
 import numpy as np
 from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
+import matplotlib.ticker as tck
 
 # import supermongo python plotting library (https://github.com/AstroJacobLi/smplotlib)
 import smplotlib
@@ -60,11 +63,14 @@ S0=10.
 sol=solve_ivp(fevo,[t0,tend],[S0*kB/mH])
 
 # plot our output!
-plt.loglog(sol.t/yr,sol.y[0]/(kB/mH))
-plt.xlim(t0/yr,tend/yr)
-plt.title('entropy vs. time')
-plt.ylabel(r'S [$k_{B}/m_{H}$]')
-plt.xlabel('time [yr]')
-plt.show()
+fig, ax = plt.subplots()
+ax.loglog(sol.t/yr,sol.y[0]/(kB/mH))
+ax.xlim(t0/yr,tend/yr)
+ax.title('entropy vs. time')
+ax.ylabel(r'S [$k_{B}/m_{H}$]')
+ax.xlabel('time [yr]')
+ax.yaxis.set_minor_locator(tck.AutoMinorLocator())
+ax.figure(figsize=(3, 3))
+ax.savefig('example.pdf',bbox_inches='tight')
 ```
 ![example](example.png "example")
