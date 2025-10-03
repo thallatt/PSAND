@@ -25,7 +25,7 @@ import smplotlib
 # define our constants (cgs units)
 yr=31560000.0
 kB=1.3807e-16
-mB=1.6726e-24
+mH=1.6726e-24
 
 # planet properties (fixed in time for this example)
 Tirr=900.
