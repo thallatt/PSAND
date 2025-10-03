@@ -3,11 +3,11 @@ A python method to couple planetary structure and dynamics, as published in [Hal
 
 If you use PSAND, please cite [Hallatt & Millholland (2025)](https://ui.adsabs.harvard.edu/abs/2025arXiv250922923H/abstract).
 
-Please also reach out to me if you would like to collaborate, have questions, or if you would like custom structure models to be created. I can be reached at thallatt@mit.edu.
+The structure grids cover temperatures 288-2884 K, core masses {10, 20} Earth masses, total masses [10.1,300] Earth masses, and "metallicities" (assumed SiO2) {0.02,0.1,0.5}.
 
 Data files for interpolation take up 117 MB (compressed) / 538 MB (uncompressed).
 
-The structure grids cover temperatures 288-2884 K, core masses {10, 20} Earth masses, total masses [10.1,300] Earth masses, and "metallicities" (assumed SiO2) {0.02,0.1,0.5}.
+Please reach out to me if you would like to collaborate, have questions, or if you would like custom structure models to be created. I can be reached at thallatt@mit.edu.
 
 ## A minimal working example
 
