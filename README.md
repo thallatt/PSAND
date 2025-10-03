@@ -17,7 +17,6 @@ This example loads our interpolation functions assuming solar composition gas, a
 import numpy as np
 from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
-import matplotlib.ticker as tck
 
 # import supermongo python plotting library (https://github.com/AstroJacobLi/smplotlib)
 import smplotlib
