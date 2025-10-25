@@ -60,7 +60,6 @@ Tirr = 289   # 288 K is the current minimum
 
 # set time range
 t0, tend = 1e6, 1e10
-S0 = 10.
 
 # output name
 outname = '250ME_Lx0'
