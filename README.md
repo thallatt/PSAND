@@ -29,7 +29,8 @@ mH = 1.6726e-24
 sigSB = 5.67e-5
 RE = 637800000.0
 
-# planet mass, core mass string, initial entropy, Tirr (constant for this example), metallicity ('002': Z=0.02), extra luminosity (constant for this example)
+# planet mass, core mass string, initial entropy, Tirr (constant for this example),
+# metallicity ('002': Z=0.02), extra luminosity (constant for this example)
 M = 250      # ME
 mc = '10'    # ME
 S0 = 10      # kB/mH
