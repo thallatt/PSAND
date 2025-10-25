@@ -63,7 +63,7 @@ Teq = 289   # 288 K is the current minimum
 t0, tend = 1e6, 1e10
 
 # output name
-outname = str(M)+'ME_mc'+mc+'_S0'+str(S0)+'_Teq'+str(Teq)+'_Lx0'
+outname = str(M)+'ME_mc'+mc+'_S0'+str(S0).replace('.','')+'_Teq'+str(int(Teq))+'_Lx0'
 
 # integrate thermal evolution!
 # implicit methods (e.g. BDF) are more stable and faster than explicit.
