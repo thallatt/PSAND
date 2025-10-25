@@ -29,8 +29,9 @@ mH = 1.6726e-24
 sigSB = 5.67e-5
 RE = 637800000.0
 
-# planet mass, core mass string, initial entropy, equilibrium temperature (constant for this example),
-# metallicity ('002': Z=0.02), extra luminosity (constant for this example)
+# planet mass, core mass string, initial entropy, equilibrium temperature
+# (constant for this example), metallicity ('002': Z=0.02),
+# extra luminosity (constant for this example)
 M = 250      # ME
 mc = '10'    # ME
 S0 = 10      # kB/mH
@@ -47,11 +48,13 @@ fTdm = np.load('data/fTm_mc'+mc+'_z'+z+'.npy',allow_pickle=True).item()
 fL = np.load('data/fL_mc'+mc+'_z'+z+'.npy',allow_pickle=True).item()
 fR = np.load('data/fR_mc'+mc+'_z'+z+'.npy',allow_pickle=True).item()
 
-# define extra heating rate (erg/s) as a function of time (s). for this example, we set it to zero.
+# define extra heating rate (erg/s) as a function of time (s).
+# for this example, we set it to zero.
 def Lextra(t):
   return extraL
 
-# evolve planet entropy by "stepping through the adiabats" (equation 5 of Hallatt & Millholland (2025)).
+# evolve planet entropy by "stepping through the adiabats"
+# (equation 5 of Hallatt & Millholland (2025)).
 def dSdtm(S,Lextra_,M,Teq):
   return (-fL(S,M,Teq) + Lextra_)/fTdm(S,M,Teq)
 
