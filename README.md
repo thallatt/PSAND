@@ -5,13 +5,13 @@ If you use PSAND, please cite [Hallatt & Millholland (2025)](https://ui.adsabs.h
 
 The structure grids cover temperatures 288-2884 K, core masses {10, 20} Earth masses, and total masses [10.1,300] Earth masses. We are currently improving the high metallicity structure models, so we only include solar composition models in the current version of PSAND.
 
-Data files for interpolation take up 117 MB (compressed) / 538 MB (uncompressed).
+Data files for interpolation take up 110 MB.
 
 Please reach out to me if you would like to collaborate, have questions, or if you would like custom structure models to be created. I can be reached at thallatt@mit.edu.
 
 ## A minimal working example
 
-This example loads our interpolation functions assuming solar composition gas, and a 10 Earth mass core. We set the irradiation temperature to 289 K and the total planet mass to 250 Earth masses. We integrate equation 5 from Hallatt & Millholland (2025). We then plot the entropy, luminosity, and radius as a function of time.
+This example loads our interpolation functions assuming solar composition gas, 250 Earth mass planet with a 10 Earth mass core, and an irradiation temperature of 289 K. We integrate equation 5 from Hallatt & Millholland (2025). We then plot the entropy, luminosity, and radius as a function of time.
 
 ```python
 import numpy as np
