@@ -98,4 +98,4 @@ ax3.set_xticks([1e6,1e7,1e8,1e9,1e10])
 fig.tight_layout()
 fig.savefig('SLR_'+outname+'.pdf',bbox_inches='tight')
 ```
-![example_evolution](example_evolution.png "example_evolution")
+![example_evolution](SLR_250ME_Lx0.png "example_evolution")
