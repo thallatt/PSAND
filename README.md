@@ -39,7 +39,8 @@ z = '002'
 extraL = 0. # erg/s
 
 # output name
-outname = str(M)+'ME_mc'+mc+'_S0'+str(S0).replace('.','')+'_Teq'+str(int(Teq))+'_z'+z+'_Lx'+str(extraL).replace('+','')
+outname = str(M)+'ME_mc'+mc+'_S0'+str(S0).replace('.','')+'_Teq'+str(int(Teq))+'_z'+z\
++'_Lx'+str(extraL).replace('+','')
 
 # load interpolation functions for planet structure
 fTdm = np.load('data/fTm_mc'+mc+'_z'+z+'.npy',allow_pickle=True).item()
