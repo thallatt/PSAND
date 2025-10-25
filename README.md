@@ -11,7 +11,7 @@ Please reach out to me if you would like to collaborate, have questions, or if y
 
 ## A minimal working example
 
-This example loads our interpolation functions assuming solar composition gas, 250 Earth mass planet with a 10 Earth mass core, and an irradiation temperature of 289 K. We integrate equation 5 from Hallatt & Millholland (2025). We then plot the entropy, luminosity, and radius as a function of time.
+This example loads our interpolation functions assuming solar composition gas, 250 Earth mass planet with a 10 Earth mass core, and an equilibrium temperature of 289 K. We integrate equation 5 from Hallatt & Millholland (2025). We then plot the entropy, luminosity, and radius as a function of time.
 
 ```python
 import numpy as np
@@ -29,7 +29,7 @@ mH = 1.6726e-24
 sigSB = 5.67e-5
 RE = 637800000.0
 
-# planet mass, core mass string, initial entropy, Tirr (constant for this example),
+# planet mass, core mass string, initial entropy, equilibrium temperature (constant for this example),
 # metallicity ('002': Z=0.02), extra luminosity (constant for this example)
 M = 250      # ME
 mc = '10'    # ME
