@@ -65,7 +65,8 @@ t0, tend = 1e6, 1e10
 outname = '250ME_Lx0'
 
 # integrate thermal evolution!
-sol = solve_ivp(fevo, [t0*yr,tend*yr], [S0*kB/mH])
+# implicit methods (e.g. BDF) are more stable and faster than explicit.
+sol = solve_ivp(fevo, [t0*yr,tend*yr], [S0*kB/mH], method='BDF')
 
 # save output from our integration
 Sout = sol.y[0]
