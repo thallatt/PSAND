@@ -29,10 +29,16 @@ mH = 1.6726e-24
 sigSB = 5.67e-5
 RE = 637800000.0
 
-# core mass identifier string
-mc = '10'
-# metallicity string ('002': Z=0.02)
+# planet mass, core mass string, initial entropy, Tirr (constant for this example), metallicity ('002': Z=0.02), extra luminosity (constant for this example)
+M = 250      # ME
+mc = '10'    # ME
+S0 = 10      # kB/mH
+Teq = 289   # 288 K is the current minimum
 z = '002'
+extraL = 0. # erg/s
+
+# output name
+outname = str(M)+'ME_mc'+mc+'_S0'+str(S0).replace('.','')+'_Teq'+str(int(Teq))+'_z'+z+'_Lx'+str(extraL).replace('+','')
 
 # load interpolation functions for planet structure
 fTdm = np.load('data/fTm_mc'+mc+'_z'+z+'.npy',allow_pickle=True).item()
@@ -40,8 +46,8 @@ fL = np.load('data/fL_mc'+mc+'_z'+z+'.npy',allow_pickle=True).item()
 fR = np.load('data/fR_mc'+mc+'_z'+z+'.npy',allow_pickle=True).item()
 
 # define extra heating rate (erg/s) as a function of time (s). for this example, we set it to zero.
-def Lx(t):
-  return 0.
+def Lextra(t):
+  return extraL
 
 # evolve planet entropy by "stepping through the adiabats" (equation 5 of Hallatt & Millholland (2025)).
 def dSdtm(S,Lextra_,M,Teq):
@@ -50,20 +56,12 @@ def dSdtm(S,Lextra_,M,Teq):
 # differential equation to be solved with scipy
 def fevo(t,y,M,Teq):
   S = y[0]
-  Lextra = Lx(t)
-  dsdt = dSdtm(S,Lextra,M,Tirr)
+  Lextra_ = Lextra(t)
+  dsdt = dSdtm(S,Lextra_,M,Tirr)
   return [dsdt]
-
-# planet mass, initial entropy, Tirr (constant for this example)
-M = 250      # ME
-S0 = 10      # kB/mH
-Teq = 289   # 288 K is the current minimum
 
 # set time range
 t0, tend = 1e6, 1e10
-
-# output name
-outname = str(M)+'ME_mc'+mc+'_S0'+str(S0).replace('.','')+'_Teq'+str(int(Teq))+'_Lx0'
 
 # integrate thermal evolution!
 # implicit methods (e.g. BDF) are more stable and faster than explicit.
