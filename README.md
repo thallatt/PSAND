@@ -3,7 +3,7 @@ A python method to couple planetary structure and dynamics, as published in [Hal
 
 If you use PSAND, please cite [Hallatt & Millholland (2025)](https://ui.adsabs.harvard.edu/abs/2025arXiv250922923H/abstract).
 
-The structure grids cover temperatures 288-2884 K, core masses {10, 20} Earth masses, total masses [10.1,300] Earth masses, and "metallicities" (assumed SiO2) {0.02,0.1,0.5}.
+The structure grids cover temperatures 288-2884 K, core masses {10, 20} Earth masses, and total masses [10.1,300] Earth masses. We are currently improving the high metallicity structure models, so we only include solar composition models in the current version of PSAND.
 
 Data files for interpolation take up 117 MB (compressed) / 538 MB (uncompressed).
 
@@ -30,7 +30,7 @@ RE = 637800000.0
 
 # core mass identifier string
 mc = '10'
-# metallicity string ('002': Z=0.02, '05': Z=0.5)
+# metallicity string ('002': Z=0.02)
 z = '002'
 
 # load interpolation functions for planet structure
@@ -55,7 +55,7 @@ def fevo(t,y):
 
 # planet mass, initial entropy, Tirr (constant for this example)
 M = 250      # ME
-S0 = 10      # kB/mH; note that the maximum entropy in the grid depends on metallicity (Smax=10.9 for Z=0.02, Smax=7.6 for Z=0.5)
+S0 = 10      # kB/mH
 Tirr = 289   # 288 K is the current minimum
 
 # set time range
