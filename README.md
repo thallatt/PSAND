@@ -58,7 +58,7 @@ def dSdtm(S,Lextra_,M,Teq):
 def fevo(t,y,M,Teq):
   S = y[0]
   Lextra_ = Lextra(t)
-  dsdt = dSdtm(S,Lextra_,M,Tirr)
+  dsdt = dSdtm(S,Lextra_,M,Teq)
   return [dsdt]
 
 # set time range
