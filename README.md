@@ -11,7 +11,7 @@ Please reach out to me if you would like to collaborate, have questions, or if y
 
 ## A minimal working example
 
-This example loads our interpolation functions assuming solar composition gas, and a 10 Earth mass core. We set the irradiation temperature to 900 K and the total planet mass to 250 Earth masses. We integrate equation 5 from Hallatt & Millholland (2025). We then plot the entropy as a function of time.
+This example loads our interpolation functions assuming solar composition gas, and a 10 Earth mass core. We set the irradiation temperature to 900 K and the total planet mass to 250 Earth masses. We integrate equation 5 from Hallatt & Millholland (2025). We then plot the entropy, luminosity, and radius as a function of time.
 
 ```python
 import numpy as np
@@ -21,81 +21,81 @@ import matplotlib.pyplot as plt
 # import supermongo python plotting library (https://github.com/AstroJacobLi/smplotlib)
 import smplotlib
 
-# define our constants (cgs units)
-yr=31560000.0
-kB=1.3807e-16
-mH=1.6726e-24
+# define constants (cgs units)
+yr = 31560000.0
+kB = 1.3807e-16
+mH = 1.6726e-24
+sigSB = 5.67e-5
+RE = 637800000.0
 
-# planet properties (fixed in time for this example)
-Tirr=900.
-M=250.
-
-# load our interpolation functions for planet structure
 # core mass identifier string
-mc='10'
-# metallicity identifier string (solar)
-z='0'
-fTdm=np.load('data/fTm_mc'+mc+'_z'+z+'_1au.npy',allow_pickle=True).item()
-fL=np.load('data/fL_mc'+mc+'_z'+z+'_1au.npy',allow_pickle=True).item()
-fR=np.load('data/fR_mc'+mc+'_z'+z+'_1au.npy',allow_pickle=True).item()
+mc = '10'
+# metallicity string ('002': Z=0.02, '05': Z=0.5)
+z = '002'
 
-# this function defines our extra heating rate. for this example, we set it to zero.
+# load interpolation functions for planet structure
+fTdm = np.load('data/fTm_mc'+mc+'_z'+z+'.npy',allow_pickle=True).item()
+fL = np.load('data/fL_mc'+mc+'_z'+z+'.npy',allow_pickle=True).item()
+fR = np.load('data/fR_mc'+mc+'_z'+z+'.npy',allow_pickle=True).item()
+
+# define extra heating rate (erg/s) as a function of time (s). for this example, we set it to zero.
 def Lx(t):
   return 0.
 
-# this function evolves planet entropy by "stepping through the adiabats" (equation 5 of Hallatt & Millholland (2025)).
+# evolve planet entropy by "stepping through the adiabats" (equation 5 of Hallatt & Millholland (2025)).
 def dSdtm(S,Lextra_,M,Tirr):
-  return (-fL(S,M,Tirr)+Lextra_)/fTdm(S,M,Tirr)
+  return (-fL(S,M,Tirr) + Lextra_)/fTdm(S,M,Tirr)
 
-# this function yields the differential equation to be solved with scipy
+# differential equation to be solved with scipy
 def fevo(t,y):
-  S=y[0]
-  Lextra=Lx(t)
-  dsdt=dSdtm(S,Lextra,M,Tirr)
+  S = y[0]
+  Lextra = Lx(t)
+  dsdt = dSdtm(S,Lextra,M,Tirr)
   return [dsdt]
 
-# define initial conditions
-t0,tend=1e6*yr,1e10*yr
-S0=10.
+# planet mass, initial entropy, Tirr (constant for this example)
+M = 250      # ME
+S0 = 10      # kB/mH
+Tirr = 289   # 288 K is the current minimum
+
+# set time range
+t0, tend = 1e6, 1e10
+S0 = 10.
+
+# output name
+outname = '250ME_Lx0'
 
 # integrate thermal evolution!
-sol=solve_ivp(fevo,[t0,tend],[S0*kB/mH])
+sol = solve_ivp(fevo, [t0*yr,tend*yr], [S0*kB/mH])
 
-# output from our integration
-Sout=sol.y[0]
-Rout=fR(Sout,M,Tirr)
-Lout=fL(Sout,M,Tirr)
+# save output from our integration
+Sout = sol.y[0]
+Rout = fR(Sout,M,Tirr)
+Lout = fL(Sout,M,Tirr)
 
-# plot our output!
+# plot output
 fig, (ax1,ax2,ax3) = plt.subplots(1,3,figsize=(10, 4))
-ax1.semilogx(sol.t/yr,Sout/(kB/mH))
-ax1.set_xlim(t0/yr,tend/yr)
-ax1.set_ylim(6,11)
-ax1.set_title('S vs. time')
-ax1.set_ylabel(r'S [$k_{B}/m_{H}$]')
+
+ax1.set_ylabel(r'$S$ [$k_{\rm B}/m_{\rm H}$]')
 ax1.set_xlabel('time [yr]')
+ax1.semilogx(sol.t/yr, Sout/(kB/mH))
 ax1.set_xticks([1e6,1e7,1e8,1e9,1e10])
-ax1.set_yticks([6.,7.,8.,9.,10.,11.])
+ax1.set_ylim(6,11)
+ax1.set_yticks(np.arange(6,12))
 
-ax2.loglog(sol.t/yr,Lout)
-ax2.set_xlim(t0/yr,tend/yr)
-ax2.set_ylim(1e24,,1e30)
-ax2.set_title('L vs. time')
-ax2.set_ylabel(r'L [erg/s]')
+ax2.set_ylabel(r'log $L$ [erg/s]')
 ax2.set_xlabel('time [yr]')
+ax2.loglog(sol.t/yr, np.log10(Lout))
 ax2.set_xticks([1e6,1e7,1e8,1e9,1e10])
-ax2.set_yticks([1e24,1e25,1e26,1e27,1e28,1e29,1e30])
+ax2.set_ylim(24,30)
+ax2.set_yticks(np.arange(24,31))
 
-ax3.semilogx(sol.t/yr,Rout)
-ax3.set_xlim(t0/yr,tend/yr)
-ax3.set_ylim(10.,25.)
-ax3.set_title('R vs. time')
-ax3.set_ylabel(r'R [R$_{\oplus}$]')
+ax3.set_ylabel(r'R [R$_\oplus$]')
 ax3.set_xlabel('time [yr]')
+ax3.semilogx(sol.t/yr, Rout)
 ax3.set_xticks([1e6,1e7,1e8,1e9,1e10])
-ax3.set_yticks(np.arange(10.,25.))
 
 fig.tight_layout()
-fig.savefig('example_evolution.png',bbox_inches='tight')
+fig.savefig('SLR_'outname+'.pdf',bbox_inches='tight')
 ```
 ![example_evolution](example_evolution.png "example_evolution")
