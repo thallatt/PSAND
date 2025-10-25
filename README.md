@@ -55,7 +55,7 @@ def fevo(t,y):
 
 # planet mass, initial entropy, Tirr (constant for this example)
 M = 250      # ME
-S0 = 10      # kB/mH
+S0 = 10      # kB/mH; note that the maximum entropy in the grid depends on metallicity (Smax=10.9 for Z=0.02, Smax=7.6 for Z=0.5)
 Tirr = 289   # 288 K is the current minimum
 
 # set time range
