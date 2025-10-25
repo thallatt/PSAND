@@ -102,7 +102,7 @@ fig.savefig('SLR_'+outname+'.pdf',bbox_inches='tight')
 # output data file
 outfile = 'planetevolution_'+outname+'.csv'
 outdat = pd.DataFrame(np.array([sol.t/yr, Sout/(kB/mH), Rout, Lout])).T
-outdat.header = ['t/yr', 'S/(kB/mH)', 'R/RE', 'L/(erg/s)']
+outdat.columns = ['t/yr', 'S/(kB/mH)', 'R/RE', 'L/(erg/s)']
 outdat.to_csv(outfile,index=False)
 ```
 ![example_evolution](SLR_250ME_Lx0.png "example_evolution")
