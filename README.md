@@ -17,6 +17,7 @@ This example loads our interpolation functions assuming solar composition gas, 2
 import numpy as np
 from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
+import pandas as pd
 
 # import supermongo python plotting library (https://github.com/AstroJacobLi/smplotlib)
 import smplotlib
@@ -43,11 +44,11 @@ def Lx(t):
   return 0.
 
 # evolve planet entropy by "stepping through the adiabats" (equation 5 of Hallatt & Millholland (2025)).
-def dSdtm(S,Lextra_,M,Tirr):
-  return (-fL(S,M,Tirr) + Lextra_)/fTdm(S,M,Tirr)
+def dSdtm(S,Lextra_,M,Teq):
+  return (-fL(S,M,Teq) + Lextra_)/fTdm(S,M,Teq)
 
 # differential equation to be solved with scipy
-def fevo(t,y):
+def fevo(t,y,M,Teq):
   S = y[0]
   Lextra = Lx(t)
   dsdt = dSdtm(S,Lextra,M,Tirr)
@@ -56,22 +57,22 @@ def fevo(t,y):
 # planet mass, initial entropy, Tirr (constant for this example)
 M = 250      # ME
 S0 = 10      # kB/mH
-Tirr = 289   # 288 K is the current minimum
+Teq = 289   # 288 K is the current minimum
 
 # set time range
 t0, tend = 1e6, 1e10
 
 # output name
-outname = '250ME_Lx0'
+outname = str(M)+'ME_mc'+mc+'_S0'+str(S0)+'_Teq'+str(Teq)+'_Lx0'
 
 # integrate thermal evolution!
 # implicit methods (e.g. BDF) are more stable and faster than explicit.
-sol = solve_ivp(fevo, [t0*yr,tend*yr], [S0*kB/mH], method='BDF')
+sol = solve_ivp(fevo, [t0*yr,tend*yr], [S0*kB/mH], method = 'BDF', args = (M,Teq))
 
 # save output from our integration
 Sout = sol.y[0]
-Rout = fR(Sout,M,Tirr)
-Lout = fL(Sout,M,Tirr)
+Rout = fR(Sout,M,Teq)
+Lout = fL(Sout,M,Teq)
 
 # plot output
 fig, (ax1,ax2,ax3) = plt.subplots(1,3,figsize=(10, 4))
@@ -97,5 +98,11 @@ ax3.set_xticks([1e6,1e7,1e8,1e9,1e10])
 
 fig.tight_layout()
 fig.savefig('SLR_'+outname+'.pdf',bbox_inches='tight')
+
+# output data file
+outfile = 'planetevolution_'+outname+'.csv'
+outdat = pd.DataFrame(np.array([sol.t/yr, Sout/(kB/mH), Rout, Lout])).T
+outdat.header = ['t/yr', 'S/(kB/mH)', 'R/RE', 'L/(erg/s)']
+outdat.to_csv(outfile,index=False)
 ```
 ![example_evolution](SLR_250ME_Lx0.png "example_evolution")
